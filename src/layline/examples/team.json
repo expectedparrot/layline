@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "name": "Three engineers, eight projects, one consequential estimate",
+  "horizon_weeks": 52,
+  "initial_events": [
+    {
+      "v": 1,
+      "id": "e0001",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "person.defined",
+      "subject": "dana",
+      "data": {
+        "name": "Dana",
+        "skills": {
+          "backend": 1
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0002",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "person.defined",
+      "subject": "priya",
+      "data": {
+        "name": "Priya",
+        "skills": {
+          "backend": 1.2,
+          "data": 1
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0003",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "person.defined",
+      "subject": "lee",
+      "data": {
+        "name": "Lee",
+        "skills": {
+          "frontend": 1
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0004",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "platform",
+      "data": {
+        "name": "Platform",
+        "skills": [
+          "backend"
+        ],
+        "owner": "dana",
+        "scope_revision": "platform:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0005",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "effort:platform",
+      "data": {
+        "project": "platform",
+        "quantity": "effort",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "platform:v1",
+        "estimate": {
+          "point": 2
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0006",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "value_rate:platform",
+      "data": {
+        "project": "platform",
+        "quantity": "value_rate",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "platform:v1",
+        "estimate": {
+          "point": 0
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0007",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "audit",
+      "data": {
+        "name": "Audit",
+        "skills": [
+          "backend"
+        ],
+        "owner": "dana",
+        "scope_revision": "audit:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0008",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "effort:audit",
+      "data": {
+        "project": "audit",
+        "quantity": "effort",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "audit:v1",
+        "estimate": {
+          "point": 1
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0009",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "value_rate:audit",
+      "data": {
+        "project": "audit",
+        "quantity": "value_rate",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "audit:v1",
+        "estimate": {
+          "point": 12
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0010",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "sso",
+      "data": {
+        "name": "Sso",
+        "skills": [
+          "backend"
+        ],
+        "owner": "dana",
+        "scope_revision": "sso:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0011",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "effort:sso",
+      "data": {
+        "project": "sso",
+        "quantity": "effort",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "sso:v1",
+        "estimate": {
+          "point": 4
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0012",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "value_rate:sso",
+      "data": {
+        "project": "sso",
+        "quantity": "value_rate",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "sso:v1",
+        "estimate": {
+          "point": 9
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0013",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "billing",
+      "data": {
+        "name": "Billing",
+        "skills": [
+          "backend"
+        ],
+        "owner": "dana",
+        "scope_revision": "billing:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0014",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "effort:billing",
+      "data": {
+        "project": "billing",
+        "quantity": "effort",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "billing:v1",
+        "estimate": {
+          "p10": 4,
+          "p50": 8,
+          "p90": 16
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0015",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "value_rate:billing",
+      "data": {
+        "project": "billing",
+        "quantity": "value_rate",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "billing:v1",
+        "estimate": {
+          "point": 16
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0016",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "exports",
+      "data": {
+        "name": "Exports",
+        "skills": [
+          "data"
+        ],
+        "owner": "priya",
+        "scope_revision": "exports:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0017",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:priya",
+      "type": "observation.recorded",
+      "subject": "effort:exports",
+      "data": {
+        "project": "exports",
+        "quantity": "effort",
+        "by": "priya",
+        "source": "human",
+        "scope_revision": "exports:v1",
+        "estimate": {
+          "point": 4
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0018",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:priya",
+      "type": "observation.recorded",
+      "subject": "value_rate:exports",
+      "data": {
+        "project": "exports",
+        "quantity": "value_rate",
+        "by": "priya",
+        "source": "human",
+        "scope_revision": "exports:v1",
+        "estimate": {
+          "point": 8
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0019",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "onboarding",
+      "data": {
+        "name": "Onboarding",
+        "skills": [
+          "frontend"
+        ],
+        "owner": "lee",
+        "scope_revision": "onboarding:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0020",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:lee",
+      "type": "observation.recorded",
+      "subject": "effort:onboarding",
+      "data": {
+        "project": "onboarding",
+        "quantity": "effort",
+        "by": "lee",
+        "source": "human",
+        "scope_revision": "onboarding:v1",
+        "estimate": {
+          "point": 2
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0021",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:lee",
+      "type": "observation.recorded",
+      "subject": "value_rate:onboarding",
+      "data": {
+        "project": "onboarding",
+        "quantity": "value_rate",
+        "by": "lee",
+        "source": "human",
+        "scope_revision": "onboarding:v1",
+        "estimate": {
+          "point": 5
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0022",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "dashboard",
+      "data": {
+        "name": "Dashboard",
+        "skills": [
+          "frontend"
+        ],
+        "owner": "lee",
+        "scope_revision": "dashboard:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0023",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:lee",
+      "type": "observation.recorded",
+      "subject": "effort:dashboard",
+      "data": {
+        "project": "dashboard",
+        "quantity": "effort",
+        "by": "lee",
+        "source": "human",
+        "scope_revision": "dashboard:v1",
+        "estimate": {
+          "point": 2
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0024",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:lee",
+      "type": "observation.recorded",
+      "subject": "value_rate:dashboard",
+      "data": {
+        "project": "dashboard",
+        "quantity": "value_rate",
+        "by": "lee",
+        "source": "human",
+        "scope_revision": "dashboard:v1",
+        "estimate": {
+          "point": 4
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0025",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "agent:planner",
+      "type": "project.defined",
+      "subject": "cleanup",
+      "data": {
+        "name": "Cleanup",
+        "skills": [
+          "backend"
+        ],
+        "owner": "dana",
+        "scope_revision": "cleanup:v1"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0026",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "effort:cleanup",
+      "data": {
+        "project": "cleanup",
+        "quantity": "effort",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "cleanup:v1",
+        "estimate": {
+          "point": 0.5
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0027",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "observation.recorded",
+      "subject": "value_rate:cleanup",
+      "data": {
+        "project": "cleanup",
+        "quantity": "value_rate",
+        "by": "dana",
+        "source": "human",
+        "scope_revision": "cleanup:v1",
+        "estimate": {
+          "point": 0.5
+        }
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0028",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "edge.added",
+      "subject": "platform>audit",
+      "data": {
+        "src": "platform",
+        "dst": "audit",
+        "type": "hard"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0029",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:dana",
+      "type": "edge.added",
+      "subject": "platform>sso",
+      "data": {
+        "src": "platform",
+        "dst": "sso",
+        "type": "hard"
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0030",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:priya",
+      "type": "commitment.set",
+      "subject": "priya",
+      "data": {
+        "project": "exports",
+        "reason": "Customer export commitment until explicitly released."
+      }
+    },
+    {
+      "v": 1,
+      "id": "e0031",
+      "ts": "2026-11-18T09:00:00Z",
+      "actor": "human:priya",
+      "type": "work.started",
+      "subject": "exports",
+      "data": {
+        "person": "priya"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "name": "initial-plan",
+      "as_of": "2026-11-18T18:00:00Z",
+      "events": []
+    },
+    {
+      "name": "question-sent",
+      "as_of": "2026-11-18T18:00:00Z",
+      "events": [
+        {
+          "v": 1,
+          "id": "e0032",
+          "ts": "2026-11-18T12:10:00Z",
+          "actor": "agent:planner",
+          "type": "question.proposed",
+          "subject": "q-billing",
+          "data": {
+            "project": "billing",
+            "person": "dana",
+            "quantity": "effort",
+            "scope_revision": "billing:v1",
+            "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+            "expires_at": "2026-11-30T12:00:00Z"
+          }
+        },
+        {
+          "v": 1,
+          "id": "e0033",
+          "ts": "2026-11-18T12:11:00Z",
+          "actor": "agent:planner",
+          "type": "question.sent",
+          "subject": "q-billing",
+          "data": {}
+        }
+      ]
+    },
+    {
+      "name": "late-completed-answer",
+      "as_of": "2026-11-20T18:00:00Z",
+      "events": [
+        {
+          "v": 1,
+          "id": "e0034",
+          "ts": "2026-11-20T12:00:00Z",
+          "actor": "agent:planner",
+          "type": "answer.ingested",
+          "subject": "q-billing",
+          "data": {
+            "person": "dana",
+            "response_id": "response-billing-1",
+            "status": "complete",
+            "answer": {
+              "p10": 0.5,
+              "p50": 1,
+              "p90": 2
+            },
+            "started_at": "2026-11-18T13:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "name": "accept-does-not-start-work",
+      "as_of": "2026-11-20T18:00:00Z",
+      "events": [],
+      "accept": "human:dana"
+    },
+    {
+      "name": "work-started",
+      "as_of": "2026-11-21T18:00:00Z",
+      "events": [
+        {
+          "v": 1,
+          "id": "e0035",
+          "ts": "2026-11-21T09:00:00Z",
+          "actor": "human:dana",
+          "type": "work.started",
+          "subject": "billing",
+          "data": {
+            "person": "dana"
+          }
+        }
+      ]
+    },
+    {
+      "name": "overrun-checkin",
+      "as_of": "2026-11-26T18:00:00Z",
+      "events": [
+        {
+          "v": 1,
+          "id": "e0036",
+          "ts": "2026-11-26T09:00:00Z",
+          "actor": "human:dana",
+          "type": "work.checkin",
+          "subject": "billing",
+          "data": {
+            "spent": 2,
+            "remaining": {
+              "p10": 3,
+              "p50": 6,
+              "p90": 12
+            },
+            "scope_revision": "billing:v1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "explicit-pause",
+      "as_of": "2026-11-27T18:00:00Z",
+      "events": [
+        {
+          "v": 1,
+          "id": "e0037",
+          "ts": "2026-11-27T09:00:00Z",
+          "actor": "human:dana",
+          "type": "work.paused",
+          "subject": "billing",
+          "data": {
+            "reason": "Owner chose to pause after the overrun."
+          }
+        }
+      ]
+    },
+    {
+      "name": "abandoned-is-not-completion-effort",
+      "as_of": "2026-11-28T18:00:00Z",
+      "events": [
+        {
+          "v": 1,
+          "id": "e0038",
+          "ts": "2026-11-28T09:00:00Z",
+          "actor": "human:dana",
+          "type": "work.closed",
+          "subject": "billing",
+          "data": {
+            "outcome": "abandoned",
+            "actual_effort": 2
+          }
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "duplicate-and-corrected-answer": [
+      {
+        "name": "initial-plan",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": []
+      },
+      {
+        "name": "question-sent",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0032",
+            "ts": "2026-11-18T12:10:00Z",
+            "actor": "agent:planner",
+            "type": "question.proposed",
+            "subject": "q-billing",
+            "data": {
+              "project": "billing",
+              "person": "dana",
+              "quantity": "effort",
+              "scope_revision": "billing:v1",
+              "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+              "expires_at": "2026-11-30T12:00:00Z"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0033",
+            "ts": "2026-11-18T12:11:00Z",
+            "actor": "agent:planner",
+            "type": "question.sent",
+            "subject": "q-billing",
+            "data": {}
+          }
+        ]
+      },
+      {
+        "name": "late-completed-answer",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0034",
+            "ts": "2026-11-20T12:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "duplicate-download",
+        "as_of": "2026-11-21T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0039",
+            "ts": "2026-11-21T10:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "correction-needs-review",
+        "as_of": "2026-11-22T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0040",
+            "ts": "2026-11-22T10:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 1,
+                "p50": 2,
+                "p90": 4
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      }
+    ],
+    "scope-change": [
+      {
+        "name": "initial-plan",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": []
+      },
+      {
+        "name": "question-sent",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0032",
+            "ts": "2026-11-18T12:10:00Z",
+            "actor": "agent:planner",
+            "type": "question.proposed",
+            "subject": "q-billing",
+            "data": {
+              "project": "billing",
+              "person": "dana",
+              "quantity": "effort",
+              "scope_revision": "billing:v1",
+              "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+              "expires_at": "2026-11-30T12:00:00Z"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0033",
+            "ts": "2026-11-18T12:11:00Z",
+            "actor": "agent:planner",
+            "type": "question.sent",
+            "subject": "q-billing",
+            "data": {}
+          }
+        ]
+      },
+      {
+        "name": "scope-changed",
+        "as_of": "2026-11-19T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0041",
+            "ts": "2026-11-19T10:00:00Z",
+            "actor": "human:dana",
+            "type": "project.scope_changed",
+            "subject": "billing",
+            "data": {
+              "reason": "Added migration and enterprise rollout."
+            }
+          }
+        ]
+      },
+      {
+        "name": "late-completed-answer",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0034",
+            "ts": "2026-11-20T12:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      }
+    ],
+    "partial-and-invalid-answer": [
+      {
+        "name": "initial-plan",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": []
+      },
+      {
+        "name": "question-sent",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0032",
+            "ts": "2026-11-18T12:10:00Z",
+            "actor": "agent:planner",
+            "type": "question.proposed",
+            "subject": "q-billing",
+            "data": {
+              "project": "billing",
+              "person": "dana",
+              "quantity": "effort",
+              "scope_revision": "billing:v1",
+              "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+              "expires_at": "2026-11-30T12:00:00Z"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0033",
+            "ts": "2026-11-18T12:11:00Z",
+            "actor": "agent:planner",
+            "type": "question.sent",
+            "subject": "q-billing",
+            "data": {}
+          }
+        ]
+      },
+      {
+        "name": "partial-response",
+        "as_of": "2026-11-19T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0043",
+            "ts": "2026-11-19T10:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "in_progress",
+              "answer": {
+                "p10": 0.5
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "invalid-complete-response",
+        "as_of": "2026-11-19T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0042",
+            "ts": "2026-11-19T11:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 9,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "late-completed-answer",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0034",
+            "ts": "2026-11-20T12:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      }
+    ],
+    "concurrent-assignment": [
+      {
+        "name": "initial-plan",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": []
+      },
+      {
+        "name": "question-sent",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0032",
+            "ts": "2026-11-18T12:10:00Z",
+            "actor": "agent:planner",
+            "type": "question.proposed",
+            "subject": "q-billing",
+            "data": {
+              "project": "billing",
+              "person": "dana",
+              "quantity": "effort",
+              "scope_revision": "billing:v1",
+              "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+              "expires_at": "2026-11-30T12:00:00Z"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0033",
+            "ts": "2026-11-18T12:11:00Z",
+            "actor": "agent:planner",
+            "type": "question.sent",
+            "subject": "q-billing",
+            "data": {}
+          }
+        ]
+      },
+      {
+        "name": "late-completed-answer",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0034",
+            "ts": "2026-11-20T12:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "conflicting-clones",
+        "as_of": "2026-11-21T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0044",
+            "ts": "2026-11-21T10:00:00Z",
+            "actor": "human:dana",
+            "type": "work.started",
+            "subject": "billing",
+            "data": {
+              "person": "dana"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0045",
+            "ts": "2026-11-21T10:00:00Z",
+            "actor": "human:dana",
+            "type": "work.started",
+            "subject": "platform",
+            "data": {
+              "person": "dana"
+            }
+          }
+        ]
+      }
+    ],
+    "stale-acceptance": [
+      {
+        "name": "initial-plan",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": []
+      },
+      {
+        "name": "question-sent",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0032",
+            "ts": "2026-11-18T12:10:00Z",
+            "actor": "agent:planner",
+            "type": "question.proposed",
+            "subject": "q-billing",
+            "data": {
+              "project": "billing",
+              "person": "dana",
+              "quantity": "effort",
+              "scope_revision": "billing:v1",
+              "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+              "expires_at": "2026-11-30T12:00:00Z"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0033",
+            "ts": "2026-11-18T12:11:00Z",
+            "actor": "agent:planner",
+            "type": "question.sent",
+            "subject": "q-billing",
+            "data": {}
+          }
+        ]
+      },
+      {
+        "name": "late-completed-answer",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0034",
+            "ts": "2026-11-20T12:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "inputs-changed-before-acceptance",
+        "as_of": "2026-11-21T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0046",
+            "ts": "2026-11-21T10:00:00Z",
+            "actor": "human:dana",
+            "type": "observation.recorded",
+            "subject": "effort:billing",
+            "data": {
+              "project": "billing",
+              "quantity": "effort",
+              "by": "dana",
+              "source": "human",
+              "scope_revision": "billing:v1",
+              "estimate": {
+                "point": 10
+              }
+            }
+          }
+        ],
+        "accept": "human:dana"
+      }
+    ],
+    "shipped": [
+      {
+        "name": "initial-plan",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": []
+      },
+      {
+        "name": "question-sent",
+        "as_of": "2026-11-18T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0032",
+            "ts": "2026-11-18T12:10:00Z",
+            "actor": "agent:planner",
+            "type": "question.proposed",
+            "subject": "q-billing",
+            "data": {
+              "project": "billing",
+              "person": "dana",
+              "quantity": "effort",
+              "scope_revision": "billing:v1",
+              "prompt": "For the current billing scope, estimate total person-weeks: p10, p50, p90.",
+              "expires_at": "2026-11-30T12:00:00Z"
+            }
+          },
+          {
+            "v": 1,
+            "id": "e0033",
+            "ts": "2026-11-18T12:11:00Z",
+            "actor": "agent:planner",
+            "type": "question.sent",
+            "subject": "q-billing",
+            "data": {}
+          }
+        ]
+      },
+      {
+        "name": "late-completed-answer",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0034",
+            "ts": "2026-11-20T12:00:00Z",
+            "actor": "agent:planner",
+            "type": "answer.ingested",
+            "subject": "q-billing",
+            "data": {
+              "person": "dana",
+              "response_id": "response-billing-1",
+              "status": "complete",
+              "answer": {
+                "p10": 0.5,
+                "p50": 1,
+                "p90": 2
+              },
+              "started_at": "2026-11-18T13:00:00Z"
+            }
+          }
+        ]
+      },
+      {
+        "name": "accept-does-not-start-work",
+        "as_of": "2026-11-20T18:00:00Z",
+        "events": [],
+        "accept": "human:dana"
+      },
+      {
+        "name": "work-started",
+        "as_of": "2026-11-21T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0035",
+            "ts": "2026-11-21T09:00:00Z",
+            "actor": "human:dana",
+            "type": "work.started",
+            "subject": "billing",
+            "data": {
+              "person": "dana"
+            }
+          }
+        ]
+      },
+      {
+        "name": "shipped",
+        "as_of": "2026-11-28T18:00:00Z",
+        "events": [
+          {
+            "v": 1,
+            "id": "e0047",
+            "ts": "2026-11-28T10:00:00Z",
+            "actor": "human:dana",
+            "type": "work.closed",
+            "subject": "billing",
+            "data": {
+              "outcome": "shipped",
+              "actual_effort": 3
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
