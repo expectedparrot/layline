@@ -93,7 +93,10 @@ class State:
     anomalies: list[dict] = field(default_factory=list)
 
     def planning_data(self) -> dict:
-        return {k: v for k, v in asdict(self).items() if k not in {"questions", "responses", "accepted", "anomalies", "latest_event_at"}}
+        data = {k: v for k, v in asdict(self).items() if k not in {"questions", "responses", "accepted", "anomalies", "latest_event_at"}}
+        # Edges are a relation, not an ordered sequence (including for library inputs).
+        data["edges"] = sorted({(src, dst) for src, dst in self.edges})
+        return data
 
     def planning_hash(self) -> str:
         return digest(self.planning_data())

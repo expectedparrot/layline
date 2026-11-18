@@ -58,7 +58,7 @@ time basis; value-unit metadata belongs in the intake record for now.
 For human observations, `by` is a defined person and `actor` must be
 `human:<that-person>`. Attribute a user's estimate to its actual speaker, not
 automatically the project owner. A non-engineering estimator can be defined with
-availability 0 (still counts toward the six-person prototype limit). Agent-inferred
+availability 0; there is no fixed roster-size cap. Agent-inferred
 estimates use `source: "agent"`, `by: "agent:planner"`, and
 `actor: "agent:planner"`; they receive lower weight. Never invent a person's
 answer or confirmation to satisfy validation. An actor annotation is not an

@@ -24,6 +24,7 @@ checkpoint's plan as the answer for a later conflicted state.
 | `limitations` | Modeling and solver limits relevant to interpreting the output. |
 | `objective`, `objective_se` | Sample mean and Monte Carlo standard error for this fixed baseline policy. Not evidence of optimality or all model uncertainty. |
 | `params`, `solver_version`, `inputs_hash` | Reproducibility context. |
+| `method` | Approximate prerequisite-bundle ranking and exact immediate assignment matching; `optimal_schedule` is false. |
 
 A null ship percentile means that percentile exceeds the horizon, including
 noncompletion. It does not mean zero weeks. Noncompletion can reflect dependencies,

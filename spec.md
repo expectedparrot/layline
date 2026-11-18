@@ -465,6 +465,10 @@ A prerequisite with no value of its own must inherit the value of what it unbloc
 
 Step 1 is a maximum-density closure problem. Solve it by Dinkelbach iteration: for a trial ratio `lambda`, find the maximum-weight closure with node weights `E[v_j] - lambda x E[effort_j]` using a min-cut (`networkx`), and update `lambda` until the best closure has weight zero. Expected sizes are tens to low hundreds of projects, so this is fast. `either_or` groups are resolved before the computation by picking the alternative with the lower expected effort.
 
+Implementation note: this is the target exact closure formulation. The current
+baseline uses the approximate prerequisite-bundle procedure in section 18 and
+reports that method explicitly. It does not enumerate all project subsets.
+
 ### Uncertain prerequisites
 
 A prerequisite with a wide effort belief or a meaningful chance of abandonment puts its whole subtree at risk. The simulator captures this directly; no special rule is needed. In practice the search tends to pull such prerequisites forward, because resolving them early improves every later decision.
@@ -991,6 +995,20 @@ interfaces and omissions.
     project and scenario. Policy decisions use beliefs, not sampled latent truth.
     Exact small-fixture comparisons evaluate the actual objective. A density
     ranking is not asserted to optimize discounted or horizon-limited value.
+11. **Approximation replaces size caps.** All projects and people participate in
+    one plan. For ranking, compute each project's unfinished-prerequisite closure.
+    For every seed closure, greedily union the candidate bundle that most improves
+    its value/effort ratio, until no single addition improves it. Pick the best
+    grown bundle, assign its density, remove it and repeat. Inputs and ties use a
+    deterministic order. This is polynomial local search, not a guarantee of the
+    maximum-density decomposition; it can miss improvements requiring multiple
+    individually unhelpful additions. Priorities still use median effort/value.
+    Immediate assignment uses rectangular Hungarian maximum-weight matching,
+    with dummy idle choices and exclusion of ineligible pairs from the output.
+    Its cost is O(P²(R+P)) for P free people and R ready projects. The six-person
+    and twelve-project rejection thresholds are removed. No new arbitrary
+    roster/backlog cap replaces them; runtime grows with input size and scenario
+    count. Plans expose `method`, `solver_version`, and the heuristic's limitations.
 
 ### Executable acceptance scenario
 
@@ -1024,6 +1042,11 @@ Additional unit scenarios cover input-order invariance, duplicate event IDs,
 atomic rejection of multi-effect transitions, dependency cycles, zero-value
 prerequisites, unavailable/missing-skill people, exhausted point estimates,
 unconditional ship percentiles, and the discounted-density counterexample.
+Whole-backlog acceptance cases cover 29 projects/6 people, 40/9, and 100/15.
+Independent exhaustive oracles validate immediate matching on small random cases;
+random dependency graphs check prerequisite ordering and effort conservation.
+Shared-prerequisite fixtures check that combined downstream benefit can outrank
+unrelated work even when individual child bundles cannot.
 
 ### EDSL integration findings and next contracts
 

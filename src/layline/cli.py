@@ -8,7 +8,7 @@ from pathlib import Path
 
 from .events import fold
 from .model import LaylineError, canonical
-from .planner import solve
+from .planner import SOLVER_METHOD, SOLVER_VERSION, solve
 from .scenarios import run_scenario
 from . import guidance
 
@@ -81,6 +81,7 @@ def main(argv: list[str] | None = None) -> int:
                 data = guidance.search(args.query)
         elif args.command == "schema":
             data = {"schema_version": 1, "mode": "prototype", "implemented": ["guide", "skills list", "skills show", "docs list", "docs show", "docs search", "demo", "replay", "solve", "schema"], "scenario": {"required": ["schema_version", "name", "initial_events", "steps"], "optional": ["variants", "horizon_weeks"]}, "event": {"required": ["v", "id", "ts", "actor", "type", "subject", "data"]}, "not_implemented": ["durable writes", "git sync", "authenticated approvals", "survey delivery", "automatic question selection", "calibration", "policy search", "live EDSL adapter"]}
+            data["solver"] = {"version": SOLVER_VERSION, **SOLVER_METHOD, "people_limit": None, "open_project_limit": None}
         elif args.command in {"demo", "replay"}:
             document = json.loads(files("layline").joinpath("examples/team.json").read_text()) if args.command == "demo" else read(args.path)
             if getattr(args, "list", False):

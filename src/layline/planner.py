@@ -1,20 +1,18 @@
-"""Bounded baseline planner for small, executable design scenarios.
+"""Approximate prerequisite-bundle ranking with polynomial assignment matching.
 
-Ranks hard-prerequisite closed sets exactly, matches free people exactly, then
-simulates that fixed priority policy. It does not optimize the full schedule.
+Simulates a fixed priority policy. Neither the ranking heuristic nor the full
+schedule is claimed to be optimal; all projects participate in the same plan.
 """
 from __future__ import annotations
 
 import math
 import random
-from itertools import combinations
 from statistics import fmean, stdev
 
 from .model import Distribution, State, digest, eligible, is_open, number, require, speed, timestamp
 
-SOLVER_VERSION = "baseline-prototype-1"
-MAX_PROJECTS = 12
-MAX_PEOPLE = 6
+SOLVER_VERSION = "bundle-heuristic-2"
+SOLVER_METHOD = {"ranking": "greedy_prerequisite_bundles", "assignment": "maximum_weight_matching", "optimal_schedule": False}
 
 
 def belief(state: State, project: str, quantity: str, as_of: str) -> tuple[Distribution, dict]:
@@ -59,20 +57,58 @@ def belief(state: State, project: str, quantity: str, as_of: str) -> tuple[Distr
 
 
 def closed_set_densities(state: State, projects: list[str], effort: dict[str, float], value: dict[str, float]) -> tuple[dict[str, float], dict[str, list[str]]]:
+    """Approximate density decomposition without enumerating arbitrary subsets.
+
+    Seed a bundle at each project plus its unfinished prerequisites. Greedily
+    grow each seed with the density-improving bundle union that scores best;
+    evaluating every seed catches shared prerequisites even when their individual
+    child bundles initially rank below unrelated work. Choose the best grown
+    bundle, remove it, and repeat. Unions remain closed under prerequisites.
+    This finite, deterministic local search has no global optimality guarantee.
+    """
     remaining = set(projects)
+    parents = {j: set() for j in projects}
+    for src, dst in state.edges:
+        if src in remaining and dst in remaining:
+            parents[dst].add(src)
+    closures: dict[str, set[str]] = {}
+    while len(closures) < len(projects):
+        ready = sorted(j for j in projects if j not in closures and parents[j] <= closures.keys())
+        require(bool(ready), "No valid closed set; check dependencies.")
+        for j in ready:
+            closures[j] = {j}.union(*(closures[p] for p in sorted(parents[j])))
+
+    def totals(bundle: set[str] | frozenset[str]) -> tuple[float, float]:
+        ordered = sorted(bundle)
+        return math.fsum(value[j] for j in ordered), math.fsum(effort[j] for j in ordered)
+
     densities, groups = {}, {}
     while remaining:
         best, best_ratio = (), -1.0
-        ordered = sorted(remaining)
-        for size in range(1, len(ordered) + 1):
-            for subset in combinations(ordered, size):
-                members = set(subset)
-                if any(dst in members and src in remaining and src not in members for src, dst in state.edges):
-                    continue
-                ratio = sum(value[j] for j in subset) / sum(effort[j] for j in subset)
-                if ratio > best_ratio + 1e-12 or (abs(ratio - best_ratio) <= 1e-12 and subset < best):
-                    best, best_ratio = subset, ratio
-        require(bool(best), "No valid closed set; check dependencies.")
+        bundles = sorted({frozenset(closures[j] & remaining) for j in remaining}, key=lambda b: tuple(sorted(b)))
+        for seed in bundles:
+            chosen = set(seed)
+            total_value, total_effort = totals(chosen)
+            ratio = total_value / total_effort
+            while True:
+                addition, improved = set(), ratio
+                for bundle in bundles:
+                    extra = bundle - chosen
+                    if not extra:
+                        continue
+                    extra_value, extra_effort = totals(extra)
+                    candidate = (total_value + extra_value) / (total_effort + extra_effort)
+                    # Strict improvement ensures termination; ordered bundles break ties.
+                    if candidate > improved + 1e-12:
+                        addition, improved = extra, candidate
+                if not addition:
+                    break
+                chosen.update(addition)
+                total_value, total_effort = totals(chosen)
+                ratio = total_value / total_effort
+            ordered = tuple(sorted(chosen))
+            if ratio > best_ratio + 1e-12 or (abs(ratio - best_ratio) <= 1e-12 and ordered < best):
+                best, best_ratio = ordered, ratio
         for project in best:
             densities[project], groups[project] = best_ratio, list(best)
         remaining.difference_update(best)
@@ -80,24 +116,52 @@ def closed_set_densities(state: State, projects: list[str], effort: dict[str, fl
 
 
 def match(state: State, people: list[str], ready: list[str], priorities: dict[str, float]) -> dict[str, str]:
-    best_score, best = 0.0, {}
+    """Maximum-weight matching via rectangular Hungarian augmenting paths.
 
-    def visit(index: int, remaining: list[str], current: dict[str, str], score: float) -> None:
-        nonlocal best_score, best
-        if index == len(people):
-            if score > best_score + 1e-12 or (score > 0 and abs(score - best_score) <= 1e-12 and tuple(sorted(current.items())) < tuple(sorted(best.items()))):
-                best_score, best = score, dict(current)
-            return
-        person = people[index]
-        visit(index + 1, remaining, current, score)
-        for project in remaining:
-            if eligible(state, person, project) and priorities[project] > 0:
-                current[person] = project
-                visit(index + 1, [p for p in remaining if p != project], current, score + priorities[project] * speed(state, person, project))
-                del current[person]
-
-    visit(0, ready, {}, 0)
-    return best
+    Dummy columns let every person remain idle. Ineligible/zero-benefit pairs
+    have weight zero and are omitted from the returned assignments. For P people
+    and R ready projects this costs O(P^2 * (R + P)), not assignment enumeration.
+    Sorted rows/columns and stable tie handling make the answer reproducible.
+    """
+    people = sorted(p for p in people if state.people[p]["availability"] > 0)
+    ready = sorted(j for j in ready if priorities[j] > 0)
+    if not people or not ready:
+        return {}
+    weights = [[priorities[j] * speed(state, p, j) if eligible(state, p, j) else 0 for j in ready] + [0.0] * len(people) for p in people]
+    require(all(math.isfinite(w) for row in weights for w in row), "Assignment scores must be finite.")
+    rows, columns = len(people), len(weights[0])
+    row_price, column_price = [0.0] * (rows + 1), [0.0] * (columns + 1)
+    assigned_row, previous = [0] * (columns + 1), [0] * (columns + 1)
+    for row in range(1, rows + 1):
+        assigned_row[0] = row
+        column = 0
+        slack, used = [math.inf] * (columns + 1), [False] * (columns + 1)
+        while True:
+            used[column] = True
+            current_row = assigned_row[column]
+            delta, next_column = math.inf, 0
+            for candidate in range(1, columns + 1):
+                if used[candidate]:
+                    continue
+                cost = -weights[current_row - 1][candidate - 1] - row_price[current_row] - column_price[candidate]
+                if cost < slack[candidate]:
+                    slack[candidate], previous[candidate] = cost, column
+                if slack[candidate] < delta:
+                    delta, next_column = slack[candidate], candidate
+            for candidate in range(columns + 1):
+                if used[candidate]:
+                    row_price[assigned_row[candidate]] += delta
+                    column_price[candidate] -= delta
+                else:
+                    slack[candidate] -= delta
+            column = next_column
+            if assigned_row[column] == 0:
+                break
+        while column:
+            prior = previous[column]
+            assigned_row[column] = assigned_row[prior]
+            column = prior
+    return {people[assigned_row[j] - 1]: ready[j - 1] for j in range(1, len(ready) + 1) if assigned_row[j] and weights[assigned_row[j] - 1][j - 1] > 0}
 
 
 def simulate(state: State, projects: list[str], durations: dict[str, float], values: dict[str, float], priorities: dict[str, float], horizon: float, rho: float) -> dict:
@@ -162,7 +226,6 @@ def solve(state: State, *, as_of: str, seed: int = 7, scenarios: int = 128, hori
     require(horizon > 0, "Horizon must be positive.")
     rho = number(discount_rate_annual) / 52
     projects = sorted(j for j in state.projects if is_open(state, j))
-    require(len(projects) <= MAX_PROJECTS and len(state.people) <= MAX_PEOPLE, f"Prototype is limited to {MAX_PROJECTS} open projects and {MAX_PEOPLE} people.")
     efforts, values, details, warnings = {}, {}, {}, []
     for j in projects:
         efforts[j], effort_info = belief(state, j, "effort", as_of)
@@ -199,12 +262,13 @@ def solve(state: State, *, as_of: str, seed: int = 7, scenarios: int = 128, hori
     objectives = [d["objective"] for d in draws]
     result = {
         "solver_version": SOLVER_VERSION, "state_hash": state.planning_hash(),
+        "method": dict(SOLVER_METHOD),
         "inputs_hash": digest({"state": state.planning_data(), "params": params, "solver_version": SOLVER_VERSION}),
         "params": params, "now": baseline["now"],
         "queue": [{"project": j, "density": density[j], "closed_set": groups[j], "remaining_effort_p50": medians[j], "value_rate_p50": value_medians[j], "evidence": details[j]} for j in sorted(projects, key=lambda j: (-density[j], j))],
         "forecast": forecasts, "objective": fmean(objectives), "objective_se": stdev(objectives) / math.sqrt(scenarios),
         "tentative": bool(warnings), "warnings": warnings,
-        "limitations": ["Fixed baseline policy; no policy search or value-of-information calculation.", "One person per project, hard dependencies only, no automatic preemption.", "No calibration; closed-set priorities use medians, not an optimal discounted schedule.", "Ship quantiles are unconditional; null means the percentile exceeds the modeled horizon."],
+        "limitations": ["Approximate prerequisite-bundle ranking; no guarantee of maximum-density groups or an optimal schedule.", "Fixed baseline policy; no policy search or value-of-information calculation.", "One person per project, hard dependencies only, no automatic preemption.", "No calibration; priorities use median effort and value.", "Ship quantiles are unconditional; null means the percentile exceeds the modeled horizon."],
     }
     result["id"] = digest(result)[:24]
     return result

@@ -4,4 +4,4 @@ from .events import fold
 from .planner import solve
 
 __all__ = ["fold", "solve"]
-__version__ = "0.0.3"
+__version__ = "0.0.4"

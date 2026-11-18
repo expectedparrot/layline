@@ -25,9 +25,12 @@ long questionnaire. Resume at the first missing piece when returning to a task.
    modeling default rather than inventing performance differences.
 2. **Projects and scope.** Ask for project names, the outcome that counts as done,
    an owner if known, and required skills. Keep scope notes in the intake record
-   and give each scope a stable revision. Start with a manageable shortlist if the
-   team exceeds the prototype's 6-person or 12-open-project limit; let the user
-   choose the subset rather than silently dropping people or projects.
+   and give each scope a stable revision. Include the whole roster and backlog:
+   there is no fixed people/project cap. The planner uses approximate prerequisite-
+   bundle ranking and efficient assignment matching. Do not split a backlog just
+   to work around the former six-person/twelve-project limits. If turnaround
+   matters, reduce `--scenarios` (for example to 16); this reduces forecast sampling
+   precision without excluding projects or changing the ranking heuristic.
 3. **Effort and value.** Ask for person-weeks, separately from elapsed calendar
    weeks. Explain p10/p50/p90 as roughly a 10%, 50%, and 90% chance of finishing
    within that effort. For ongoing work, ask for effort spent and effort remaining.

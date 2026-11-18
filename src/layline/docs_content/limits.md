@@ -1,11 +1,27 @@
 # Prototype limits and EDSL integration
 
-The local planner supports at most 12 open projects and 6 people, one person per
-project, constant availability, hard dependencies, and feature projects. It ranks
-closed sets using median effort/value and performs exact small-instance assignment
-matching before simulating a fixed priority policy. This is not a guarantee of an
-optimal discounted schedule. It preserves active work and explicit commitments;
-there is no automatic preemption.
+The local planner has no fixed people or project cap. Include the whole backlog
+in one plan. It supports one person per project, constant availability, hard
+dependencies, and feature projects.
+
+Ranking is approximate: start with each project and its unfinished prerequisites,
+greedily add other prerequisite bundles when the combined value-to-effort ratio
+improves, choose the best grown bundle, and repeat on the remaining projects.
+Shared prerequisites can therefore benefit several projects without enumerating
+all possible subsets. This deterministic local search can miss a better grouping;
+there is no maximum-density or optimal-schedule guarantee. It uses median effort
+and value, then simulates the resulting fixed priority policy.
+
+Assignments use polynomial-time maximum-weight matching, accounting for skills,
+availability and the priorities. This optimizes the immediate assignment score,
+not the full discounted schedule. Active work and explicit commitments are
+preserved; there is no automatic preemption. Plans expose the algorithms in
+`method` and describe their qualifications in `limitations`.
+
+Runtime still grows with backlog, roster and scenario count. To get a quicker
+forecast, lower `--scenarios` (for example to 16); all projects still participate.
+The old six-person/twelve-project restrictions no longer apply. Reducing scenarios
+reduces Monte Carlo precision, not the number of projects considered.
 
 Priors and agent-only evidence can make recommendations tentative. Calibration,
 negative-value and mixed zero/positive beliefs, either-or dependencies, probes,

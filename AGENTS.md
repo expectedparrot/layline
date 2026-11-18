@@ -75,6 +75,11 @@ Keep these distinctions intact:
 Retain explicit evaluation time, deterministic work budgets and stable random
 streams. Policy decisions must not inspect sampled latent truth. Density ranking
 is a baseline heuristic, not a general optimum for the discounted objective.
+Ranking uses greedy prerequisite-bundle growth; immediate assignments use
+polynomial Hungarian matching. Do not reintroduce exhaustive production subset
+or assignment enumeration or fixed roster/backlog caps. Small exhaustive oracles
+belong in tests. Cover whole-backlog planning, shared prerequisites, eligibility,
+idle assignments, deterministic ties, and comparison with those oracles.
 
 ## Scope and validation
 

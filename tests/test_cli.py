@@ -144,3 +144,31 @@ def test_planning_still_defaults_to_json():
     result = run_command("demo", "--list")
     assert result.returncode == 0
     assert json.loads(result.stdout)["ok"] is True
+
+
+def test_cli_plans_29_projects_without_shortlisting(tmp_path):
+    from test_scaling import backlog
+
+    state = backlog()
+    events = []
+
+    def add(kind, subject, data, actor="agent:planner"):
+        events.append({"v": 1, "id": f"{len(events):06}", "ts": "2026-11-18T12:00:00Z", "actor": actor, "type": kind, "subject": subject, "data": data})
+
+    for person, data in state.people.items():
+        add("person.defined", person, data)
+    for project, data in state.projects.items():
+        add("project.defined", project, data)
+    for src, dst in state.edges:
+        add("edge.added", f"{src}>{dst}", {"src": src, "dst": dst}, "human:person-000")
+    for observation in state.observations.values():
+        add("observation.recorded", observation["event_id"], observation, "human:person-000")
+    path = tmp_path / "whole-backlog.json"
+    path.write_text(json.dumps(events))
+    result, payload = invoke("solve", str(path), "--as-of", "2026-11-20T18:00:00Z", "--scenarios", "8", cwd=tmp_path)
+    assert result.returncode == 0, payload
+    assert len(payload["data"]["queue"]) == len(payload["data"]["forecast"]) == 29
+    assert len(payload["data"]["now"]) == 6
+    _, schema = invoke("schema")
+    assert schema["data"]["solver"]["people_limit"] is None
+    assert schema["data"]["solver"]["open_project_limit"] is None

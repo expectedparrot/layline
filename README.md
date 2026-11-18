@@ -115,12 +115,16 @@ Results include assignments, ranking evidence, forecast quantiles, warnings,
 input hashes, and the solver's limitations. A null ship percentile means that
 percentile lies beyond the modeled horizon, including noncompletion.
 
-The baseline ranks closed sets under hard dependencies, matches eligible people
-to ready projects, and simulates fixed priorities with reproducible random
-streams. It does not claim to find the optimal discounted schedule. The prototype
-is bounded to 12 open projects and 6 people; exhaustive subset/matching routines
-are for small design fixtures, not production scaling. The first slice preserves
-active work and explicit commitments until completion or an explicit transition.
+The baseline uses approximate prerequisite-bundle ranking, efficient maximum-weight
+assignment matching, and reproducible simulation. It considers the entire backlog
+without a fixed people or project cap. Shared prerequisites can improve a group's
+priority, but the heuristic does not guarantee the best grouping or optimal
+discounted schedule. Plans expose their `method` and `limitations`.
+
+Active work and explicit commitments stay assigned until completion or an explicit
+transition. Runtime grows with the inputs and scenario count; reduce `--scenarios`
+for a quicker forecast instead of excluding projects from the plan. The former
+six-person/twelve-project restrictions have been removed.
 
 There are **no durable repository writes, git synchronization, live EDSL survey
 calls, authenticated approvals, automated question selection, calibration, or
