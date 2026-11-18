@@ -937,7 +937,14 @@ The first slice is a read-only Python CLI and library for replaying authored
 scenarios and solving local event inputs. Operator workflows ship inside the
 package: `guide` prints a readable starting point and routes to `skills show plan-team`; `skills list/show` exposes
 onboarding and plan-review instructions, and `docs list/show/search` exposes
-input/result references. The calling agent asks questions and prepares files;
+context research and input/result references. Onboarding asks the calling agent
+to read available company repositories, contributor history and product/strategy
+docs, draft engineer profiles with provenance, and confirm inferred skills,
+current availability and priorities with the user. Commit activity does not set
+speed multipliers or establish commitments. Rich profiles and company context
+stay in companion intake notes; repository access uses the agent's existing tools,
+not a built-in connector or new event schema.
+The calling agent asks questions and prepares files;
 the CLI does not prompt or maintain onboarding state. Guidance commands print
 readable text by default and expose the same information with `--json`.
 Repository `AGENTS.md`
@@ -1073,8 +1080,9 @@ not a model label on an EDSL Results object.
 ### Scenarios still requiring design or implementation
 
 - Automate persistence and progress tracking for backlog onboarding. The bundled
-  skill currently guides the agent through scope, comparable value anchors and
-  estimates, and exposes tentative recommendations through local input files.
+  skill currently guides the agent through company/repository research, engineer
+  profiles, scope, comparable value anchors and estimates, and exposes tentative
+  recommendations through local input files.
 - Temporary unavailability, multi-person staffing, deadlines, and expiring
   commitments. The current simulator supports only constant availability and one
   person per project.

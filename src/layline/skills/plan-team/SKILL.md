@@ -1,6 +1,6 @@
 ---
 name: plan-team
-description: Guide a user from engineers, projects, estimates and constraints to a first Layline baseline plan using the local CLI.
+description: Research company context and engineer experience, then guide a user through projects, estimates and constraints to a first Layline baseline plan using the local CLI.
 ---
 
 # Plan a team with Layline
@@ -15,12 +15,36 @@ batch of related questions at a time; do not turn the following stages into a
 long questionnaire. Resume at the first missing piece when returning to a task.
 `layline guide` describes this workflow; it does not remember completed stages.
 
+## Build company context and draft engineer profiles
+
+Read `layline docs show context`. Start with relevant company repositories and
+product or strategy docs already available in the workspace or supplied by the
+user. If the sources are unclear, ask which company/team and repositories to use.
+Inspect contributor history, representative changes, ownership files and
+architecture docs to learn what people have worked on. Include review and issue
+history when available. Learn the product, customers, current goals and priorities
+so project outcomes and the shared value scale have a meaningful basis.
+
+Draft engineer profiles with areas of experience, concrete examples, source links
+or paths and dates, confidence, and open questions. Distinguish authors from
+committers and resolve aliases, bots and uncertain identity matches with the user.
+Treat experience as evidence for candidate skills, not proof of current ownership,
+availability, speed or commitment. Commit counts and lines changed are not
+productivity measures; missing activity is not evidence of missing ability.
+
+Present a short context summary and draft profiles for correction before using
+inferred skills to constrain assignments. Ask only about consequential gaps,
+including current team membership, work outside Git, availability and priorities.
+If repositories or docs are unavailable, continue from the user's account. Keep
+the richer profiles and provenance in intake notes; the current planner accepts
+skill multipliers and availability, not a profile or company-context schema.
+
 ## Collect the planning context
 
-1. **Engineers.** Ask who is available, what kinds of work they can do, and what
+1. **Engineers.** Confirm the draft roster and skills. Ask who is available and what
    fraction of a normal week remains after support, on-call, and other duties.
-   Example opening: “Who are the engineers, what kinds of work can each do, and
-   roughly how much of their week is available for project work?” Use speed 1 for
+   Example follow-up: “Dana appears to have worked on billing and backend APIs.
+   Is that still a good fit, and how much of Dana's week is available?” Use speed 1 for
    listed skills unless the user supplies another multiplier; disclose this
    modeling default rather than inventing performance differences.
 2. **Projects and scope.** Ask for project names, the outcome that counts as done,
@@ -54,7 +78,8 @@ information score. Never record your inferred estimate as somebody else's answer
 
 Read `layline docs show inputs` for the supported event fields and a runnable
 example. Prepare the event array yourself in a task directory, alongside an
-intake JSON recording units, scope descriptions, assumptions, and supplied facts.
+intake JSON recording company context, engineer profiles, source references,
+units, scope descriptions, assumptions, and supplied facts.
 These are local planning artifacts written by you; the CLI has no state writer.
 Use unique filenames/revisions for later alternatives so the earlier inputs and
 outputs remain available. Keep the package's bundled demo unchanged.

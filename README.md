@@ -28,14 +28,20 @@ by loading the plan-team skill:
 
 .venv-layline/bin/layline skills show plan-team
 
-Walk me through engineers and availability, projects and scope, effort and value
-estimates, dependencies, existing work, and commitments. Ask a small batch of
-questions at a time and use information I've already provided. Start with the
-engineers if that information is missing.
+Build context from relevant company repositories, contributor history, and
+product or strategy docs available to you. Ask which sources to use if unclear.
+Draft engineer profiles from concrete work examples with source references;
+confirm inferred skills and current roles with me. Don't infer productivity or
+speed from commit counts. Learn our company goals and priorities, then walk me
+through availability, projects and scope, effort and value estimates,
+dependencies, existing work, and commitments. Ask a small batch of questions at
+a time and reuse information I've already provided. If sources are unavailable,
+continue from what I can tell you.
 
 Prepare the input files yourself and run the planner; don't ask me to write JSON.
-Keep our intake notes, versioned inputs, and plan outputs under planning/ in our
-working directory. Preserve unknowns rather than inventing estimates or approvals.
+Keep company context, engineer profiles and their sources in our intake notes,
+alongside versioned inputs and plan outputs under planning/ in our working
+directory. Preserve unknowns rather than inventing estimates or approvals.
 Explain the proposed assignments, why they rank that way, and any important
 uncertainty or unsupported requirements. Then help me correct and compare the plan.
 
@@ -45,8 +51,7 @@ the bundled demo. No EDSL account or API key is needed for this local workflow.
 ```
 
 If the agent uses an existing environment, it should substitute that environment's
-Python and `layline` executable for the `.venv-layline/bin/` paths above. The GitHub
-installation command will work once this repository is available at that URL.
+Python and `layline` executable for the `.venv-layline/bin/` paths above.
 
 ## Using Layline
 
@@ -55,7 +60,9 @@ references available from any installed copy. [AGENTS.md](AGENTS.md) is for agen
 developing the package.
 
 Start with **`layline guide`** and follow its instructions. It prints the first
-question and the path through engineers, projects, estimates and commitments.
+question and the path through company context, engineer profiles, projects,
+estimates and commitments. It suggests inspecting company repositories and
+contributor history to draft profiles, then confirming planning facts with the user.
 An agent reading the guide follows the skill in the current conversation,
 prepares local inputs, and explains the first plan. No agent-launch command is
 needed. The CLI prints guidance; it does not wait for terminal answers.
@@ -66,6 +73,7 @@ layline guide
 layline skills list
 layline skills show plan-team
 layline docs list
+layline docs show context
 layline docs show inputs
 layline docs search "remaining effort"
 ```
@@ -99,8 +107,10 @@ structured guidance. Planning commands and all errors return one JSON envelope
 on stdout. `--help` returns conventional usage text.
 
 The `guide --json` response includes a structured next action to load the
-onboarding skill. `skills` exposes workflows; `docs` exposes input formats, result
-interpretation, examples, and limits. These resources are bundled in the wheel.
+onboarding skill. `skills` exposes workflows; `docs` exposes context research,
+input formats, result interpretation, examples, and limits. These resources are
+bundled in the wheel. Repository research uses the calling agent's tools; Layline
+has no built-in repository reader or engineer-profile store.
 
 ```bash
 layline replay my-scenario.json --scenarios 64 --seed 7

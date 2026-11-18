@@ -4,6 +4,9 @@
 prepares this local file from the user's information. The CLI does not write an
 event repository. Keep an intake JSON alongside it for scope descriptions, the
 shared value unit, assumptions, and facts that the prototype cannot model.
+Keep company context and richer engineer profiles with source references there
+too; `layline docs show context` explains how to research and confirm them before
+mapping skills and availability into supported person fields.
 
 Every event needs `v: 1`, unique `id`, timezone-aware `ts`, `actor`, `type`,
 `subject`, and a `data` object. Replay sorts by timestamp and then id. Define

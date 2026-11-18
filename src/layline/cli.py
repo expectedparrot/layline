@@ -22,7 +22,7 @@ def parser() -> Parser:
     p = Parser(description="Layline planning prototype. Start with 'layline guide' for agent-led setup. Commands are non-interactive and read-only.")
     p.add_argument("--json", action="store_true", help="Return JSON for guidance commands; planning commands always return JSON.")
     subs = p.add_subparsers(dest="command", required=True)
-    guide = subs.add_parser("guide", help="Show the agent's path from team setup to a first plan.")
+    guide = subs.add_parser("guide", help="Show the agent's path from company context and engineer profiles to a first plan.")
     guide.add_argument("--json", action="store_true", default=argparse.SUPPRESS, help="Return structured guidance.")
     skill_commands = subs.add_parser("skills", help="Discover bundled operator skills.")
     skill_subs = skill_commands.add_subparsers(dest="skill_command", required=True)

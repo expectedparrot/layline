@@ -64,10 +64,11 @@ def search(query: str) -> dict:
 def guide() -> dict:
     return {
         "mode": "agent_led_planning",
-        "purpose": "Guide a conversation about the user's team, prepare an event input file, and explain a first baseline plan.",
+        "purpose": "Build company context and evidence-backed engineer profiles, prepare an event input file, and explain a first baseline plan.",
         "how_to_use": "The calling agent asks the questions in chat and prepares files. CLI commands remain non-interactive and read-only.",
-        "first_question": "Who are the engineers, what kinds of work can each do, and roughly how much of their week is available for project work?",
-        "workflow": ["engineers and availability", "projects and scope", "effort and a shared value scale", "dependencies, current work and commitments", "prepare inputs and solve", "explain, correct and compare"],
+        "first_question": "Which company or team are we planning for, and which repositories or product and strategy docs should I use for context?",
+        "research": "Read relevant company repositories, contributor history and company docs available to you. Draft engineer profiles with sources and distinguish observed experience from inferred skills. Confirm current roles, availability and priorities; commit counts do not measure productivity or speed. If sources are unavailable, continue with the user's account.",
+        "workflow": ["company context and repository research", "engineer profiles and availability", "projects and scope", "effort and a shared value scale", "dependencies, current work and commitments", "prepare inputs and solve", "explain, correct and compare"],
         "instructions": "Read 'layline skills show plan-team', then begin the workflow with the user. Use information already supplied and ask only for missing details. Prepare the inputs and run the planner yourself; do not ask the user to write JSON or launch another agent.",
         "available_skills": skills(),
         "references": action("docs", "list"),
@@ -88,8 +89,10 @@ def render(command: str, data: dict) -> str:
             "the planner. No separate agent-launch command is needed.\n\n"
             f"First question:\n  {data['first_question']}\n\n"
             "Use details already provided; ask only for what is missing.\n\n"
+            f"Build context:\n  {data['research']}\n\n"
             f"Then work through:\n{stages}\n\n"
             "References:\n"
+            "  layline docs show context\n"
             "  layline docs show inputs\n"
             "  layline docs show results\n"
             "  layline docs show limits\n\n"
