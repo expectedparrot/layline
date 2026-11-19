@@ -3,8 +3,31 @@
 The calling agent can use its existing file, Git and connected-source tools to
 prepare better planning inputs. Layline itself does not fetch repositories,
 integrate with a Git hosting service, or maintain an engineer-profile database.
-Use relevant sources already supplied or accessible for this task. Ask where to
-look if unclear; unavailable sources need not block planning from the user's account.
+Proactively check for relevant sources accessible for this task before asking the
+user where to look. Unavailable sources need not block planning from the user's account.
+
+## Discover repository access first
+
+Start with the current workspace and known company checkout directories. Inspect
+Git remotes and READMEs to identify likely company repositories. Discover available
+repository connectors and their read/search capabilities; prefer these when they
+cover the task. Otherwise, an already authenticated hosting CLI can check a known
+repository or list repositories in the identified company organization. Keep
+discovery scoped to that company rather than every repository the account can see.
+
+Verify access by actually reading repository metadata and a small source such as
+its README or recent commits. A local checkout may work even when remote access
+fails; record the revision and coverage you used. A remote URL or authenticated
+account alone does not establish access to that repository. Distinguish a denied
+read, a missing tool, and an empty search result from the company having no repos.
+Use existing access; do not ask the user to paste credentials into the conversation.
+
+When relevant repos are readable, proceed to inspect them and draft team profiles
+without requiring the user to enumerate sources first. Briefly report what you
+found and use it to ask focused follow-ups. If several companies are plausible,
+ask which team is in scope. If access is unavailable or incomplete, explain what
+you checked and ask for the missing repository location or team details, then
+continue with available evidence. Keep the access findings in the intake notes.
 
 ## Understand the company and the work
 

@@ -67,9 +67,9 @@ def guide() -> dict:
         "purpose": "Build company context and evidence-backed engineer profiles, prepare an event input file, and explain a first baseline plan.",
         "how_to_use": "The calling agent asks the questions in chat and prepares files. CLI commands remain non-interactive and read-only.",
         "first_question": "Which company or team are we planning for, and which repositories or product and strategy docs should I use for context?",
-        "research": "Read relevant company repositories, contributor history and company docs available to you. Draft engineer profiles with sources and distinguish observed experience from inferred skills. Confirm current roles, availability and priorities; commit counts do not measure productivity or speed. If sources are unavailable, continue with the user's account.",
+        "research": "First check local checkouts, Git remotes and available repository connections for access to relevant company repos. Verify access with a small read using existing credentials, then inspect contributor history and company docs to draft engineer profiles with sources. Ask for repository locations only if discovery leaves a gap. Confirm inferred skills, current roles, availability and priorities; commit counts do not measure productivity or speed. If sources are unavailable, continue with the user's account.",
         "workflow": ["company context and repository research", "engineer profiles and availability", "projects and scope", "effort and a shared value scale", "dependencies, current work and commitments", "prepare inputs and solve", "explain, correct and compare"],
-        "instructions": "Read 'layline skills show plan-team', then begin the workflow with the user. Use information already supplied and ask only for missing details. Prepare the inputs and run the planner yourself; do not ask the user to write JSON or launch another agent.",
+        "instructions": "Read 'layline skills show plan-team', then check for repository access before asking the user to locate sources or describe the team from scratch. Use information already supplied and ask only for missing details. Prepare the inputs and run the planner yourself; do not ask the user to write JSON or launch another agent.",
         "available_skills": skills(),
         "references": action("docs", "list"),
         "limits": "Local baseline planning only. No live surveys, automatic state writer, git synchronization, authenticated approvals, calibration, or policy search.",
@@ -87,9 +87,9 @@ def render(command: str, data: dict) -> str:
             "If you are the agent helping the user, read that skill and follow it.\n"
             "Ask the questions in this conversation, prepare the inputs, and run\n"
             "the planner. No separate agent-launch command is needed.\n\n"
-            f"First question:\n  {data['first_question']}\n\n"
-            "Use details already provided; ask only for what is missing.\n\n"
-            f"Build context:\n  {data['research']}\n\n"
+            f"First, check access and build context:\n  {data['research']}\n\n"
+            f"If company or source context is still missing, ask:\n  {data['first_question']}\n\n"
+            "Use details already provided or discovered; ask only for what is missing.\n\n"
             f"Then work through:\n{stages}\n\n"
             "References:\n"
             "  layline docs show context\n"

@@ -938,8 +938,11 @@ scenarios and solving local event inputs. Operator workflows ship inside the
 package: `guide` prints a readable starting point and routes to `skills show plan-team`; `skills list/show` exposes
 onboarding and plan-review instructions, and `docs list/show/search` exposes
 context research and input/result references. Onboarding asks the calling agent
-to read available company repositories, contributor history and product/strategy
-docs, draft engineer profiles with provenance, and confirm inferred skills,
+to first discover company repository access through local checkouts, remotes and
+available connections, verify it with a small read, and ask for source locations
+only when discovery leaves gaps. The agent reads company repositories,
+contributor history and product/strategy docs, drafts engineer profiles with
+provenance, and confirms inferred skills,
 current availability and priorities with the user. Commit activity does not set
 speed multipliers or establish commitments. Rich profiles and company context
 stay in companion intake notes; repository access uses the agent's existing tools,

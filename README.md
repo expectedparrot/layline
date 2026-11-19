@@ -28,8 +28,12 @@ by loading the plan-team skill:
 
 .venv-layline/bin/layline skills show plan-team
 
-Build context from relevant company repositories, contributor history, and
-product or strategy docs available to you. Ask which sources to use if unclear.
+First check whether you can access our company repositories through local
+checkouts, Git remotes, connected repository tools or an already authenticated
+hosting CLI. Verify access with a small read and use relevant repos to learn
+about the team before asking me to list sources or describe everyone from scratch.
+Build context from contributor history and product or strategy docs. Ask which
+company or sources to use only if discovery leaves that unclear.
 Draft engineer profiles from concrete work examples with source references;
 confirm inferred skills and current roles with me. Don't infer productivity or
 speed from commit counts. Learn our company goals and priorities, then walk me
@@ -59,10 +63,10 @@ Agents using Layline: start with `layline guide`. It routes to bundled skills an
 references available from any installed copy. [AGENTS.md](AGENTS.md) is for agents
 developing the package.
 
-Start with **`layline guide`** and follow its instructions. It prints the first
-question and the path through company context, engineer profiles, projects,
-estimates and commitments. It suggests inspecting company repositories and
-contributor history to draft profiles, then confirming planning facts with the user.
+Start with **`layline guide`** and follow its instructions. It first directs the
+agent to discover and verify company repository access, then use contributor
+history and docs to draft team profiles. It asks for missing context and leads
+through projects, estimates and commitments, confirming planning facts with the user.
 An agent reading the guide follows the skill in the current conversation,
 prepares local inputs, and explains the first plan. No agent-launch command is
 needed. The CLI prints guidance; it does not wait for terminal answers.

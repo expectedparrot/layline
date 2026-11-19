@@ -17,9 +17,16 @@ long questionnaire. Resume at the first missing piece when returning to a task.
 
 ## Build company context and draft engineer profiles
 
-Read `layline docs show context`. Start with relevant company repositories and
-product or strategy docs already available in the workspace or supplied by the
-user. If the sources are unclear, ask which company/team and repositories to use.
+Read `layline docs show context`. First try to discover accessible company repos:
+inspect local checkouts and Git remotes, discover available repository connectors,
+and use an existing authenticated Git hosting CLI if needed. Verify relevant
+repository access with a small read; a configured remote or login alone is not
+proof of access. Use the company/team identified in the conversation or workspace
+to scope discovery. If that identity is ambiguous or discovery leaves gaps, ask
+only for the missing context. Do not start by asking the user to list repos or
+describe every engineer when accessible sources can supply a draft.
+
+Use discovered repositories and product or strategy docs to build team knowledge.
 Inspect contributor history, representative changes, ownership files and
 architecture docs to learn what people have worked on. Include review and issue
 history when available. Learn the product, customers, current goals and priorities
