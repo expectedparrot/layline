@@ -28,10 +28,13 @@ by loading the plan-team skill:
 
 .venv-layline/bin/layline skills show plan-team
 
-First check whether you can access our company repositories through local
-checkouts, Git remotes, connected repository tools or an already authenticated
-hosting CLI. Verify access with a small read and use relevant repos to learn
-about the team before asking me to list sources or describe everyone from scratch.
+First discover our remote company repositories through connected GitHub/GitLab
+tools or an already authenticated hosting CLI. List or search the company's
+organization/group, including accessible private and public repos, even if no
+repos are checked out locally. Read files and contributor history remotely;
+also inspect relevant local checkouts. Verify access with a small read and use
+relevant repos to learn about the team before asking me to list sources or
+describe everyone from scratch.
 Build context from contributor history and product or strategy docs. Ask which
 company or sources to use only if discovery leaves that unclear.
 Draft engineer profiles from concrete work examples with source references;

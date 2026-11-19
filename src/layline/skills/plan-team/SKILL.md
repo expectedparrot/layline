@@ -18,8 +18,11 @@ long questionnaire. Resume at the first missing piece when returning to a task.
 ## Build company context and draft engineer profiles
 
 Read `layline docs show context`. First try to discover accessible company repos:
-inspect local checkouts and Git remotes, discover available repository connectors,
-and use an existing authenticated Git hosting CLI if needed. Verify relevant
+list or search the company's remote organization/group through available GitHub,
+GitLab or other repository connectors, or an existing authenticated hosting CLI.
+Include accessible private repos and public company repos. Do this even without
+local checkouts or configured Git remotes; read remote files and history directly
+when supported. Also inspect relevant local checkouts. Verify relevant
 repository access with a small read; a configured remote or login alone is not
 proof of access. Use the company/team identified in the conversation or workspace
 to scope discovery. If that identity is ambiguous or discovery leaves gaps, ask

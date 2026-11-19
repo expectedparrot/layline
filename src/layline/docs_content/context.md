@@ -8,12 +8,25 @@ user where to look. Unavailable sources need not block planning from the user's 
 
 ## Discover repository access first
 
-Start with the current workspace and known company checkout directories. Inspect
-Git remotes and READMEs to identify likely company repositories. Discover available
-repository connectors and their read/search capabilities; prefer these when they
-cover the task. Otherwise, an already authenticated hosting CLI can check a known
-repository or list repositories in the identified company organization. Keep
-discovery scoped to that company rather than every repository the account can see.
+Check both remote hosting services and local checkouts. Discover available GitHub,
+GitLab or other repository connectors and use their list/search capabilities to
+find repos in the identified company organization or group, including accessible
+private repos. Prefer connectors when they cover the task; otherwise use an
+already authenticated hosting CLI or API. Public company repositories can also
+be read without authentication where supported. Keep discovery scoped to the
+company rather than every repository the account can see.
+
+Remote discovery does not depend on a local checkout or a configured Git remote.
+Search the company's hosted repositories even if the workspace is empty or only
+contains Layline. Read remote READMEs, directory trees, contributor/commit history,
+pull requests and reviews directly through available tools; cloning is not a
+prerequisite. Account for pagination and search limits, and record incomplete
+coverage instead of treating the first results as the whole company.
+
+Also inspect the current workspace and known company checkout directories. Git
+remotes and READMEs can help identify the hosting service and organization, but
+do not limit research to repos already present on disk. Use conversation context
+to identify the company when local clues are absent.
 
 Verify access by actually reading repository metadata and a small source such as
 its README or recent commits. A local checkout may work even when remote access

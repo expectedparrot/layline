@@ -938,9 +938,12 @@ scenarios and solving local event inputs. Operator workflows ship inside the
 package: `guide` prints a readable starting point and routes to `skills show plan-team`; `skills list/show` exposes
 onboarding and plan-review instructions, and `docs list/show/search` exposes
 context research and input/result references. Onboarding asks the calling agent
-to first discover company repository access through local checkouts, remotes and
-available connections, verify it with a small read, and ask for source locations
-only when discovery leaves gaps. The agent reads company repositories,
+to first discover remote company repositories through organization/group listing
+or search using connected tools or an authenticated hosting CLI, including when
+no local checkout or remote is configured. Remote files and history can be read
+directly; local checkouts provide additional context. Agents verify access with
+a small read and ask for source locations only when discovery leaves gaps.
+The agent reads company repositories,
 contributor history and product/strategy docs, drafts engineer profiles with
 provenance, and confirms inferred skills,
 current availability and priorities with the user. Commit activity does not set
